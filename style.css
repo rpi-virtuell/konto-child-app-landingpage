@@ -1,0 +1,103 @@
+/*
+Theme Name: rpi-virtuell Konto
+Theme URI: https://rpi-virtuell
+Template: app-landing-page
+Author: Joachim Happel
+Author URI: https://rarathemes.com/
+Description: Child thme of App Landing Page is a WordPress theme from Rara Theme. It will help you to showcase your latest app in a creative and appealing way. The theme offers several features to delight your audience with app snapshots, video demo, links to download from Apple Store and Google Store. The theme is mobile responsive and translation ready. Get free support here: https://rarathemes.com/support-forum/, check demo here: https://demo.rarathemes.com/app-landing-page/ and documentation at https://docs.rarathemes.com/docs/app-landing-page/
+Tags: one-column,two-columns,right-sidebar,custom-logo,footer-widgets,full-width-template,custom-menu,custom-background,featured-images,sticky-post,threaded-comments,translation-ready,theme-options,blog,portfolio
+Version: 1.1.3.1580029584
+Updated: 2020-01-26 10:06:24
+
+*/
+
+/* Register Page */
+
+body#login-page {
+    background: #fff;
+}
+
+.custom-logo-link img.custom-logo{
+    max-width: 95px;
+}
+
+.register-page-container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px #808080;
+    flex-direction: row;
+}
+
+.register-page-container img {
+    width: 100%;
+    height: auto;
+}
+
+p.or {
+    background: #572A79;
+    border-radius: 500px;
+    padding: 20px;
+    color: #fff;
+    width: 65px;
+}
+
+.register-input, #user_login, #user_pass {
+    width: 100%;
+    padding: 10px;
+    color: #572A79 !important;
+    border-radius: 10px;
+    background: #F0F0F0;
+    border: 0px;
+}
+
+#register-submit-btn, #wp-submit {
+    width: 100%;
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: none;
+    background: #572A79;
+    border-color: #572A79;
+    text-shadow: none;
+    padding: 10px 15px;
+    border: 0px;
+}
+
+.register-error {
+    background-color: #dc3232;
+    color: #fff;
+    margin-bottom: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    body#login-page {
+        background-image: url('assets/img/login-bg.jpg');
+        background-size: cover;
+    }
+}
+
+/*recaptcha // dsgvo all in one */
+#recaptcha_deactivated{
+	color: #999; padding:3px 5px;
+	margin:10px 0;
+	font-size:15px;
+	border: 1px solid red;
+}
+#recaptcha_deactivated a{
+	color:red;
+}
+#recaptcha_deactivated a.actionbutton{
+	background: #5ABF32; color:white; padding:5px 10px;  border-radius:3px;
+}
+#recaptcha_deactivated em{
+	float:right;
+	
+}
+#tarteaucitronRoot #tarteaucitronBack{
+	background-color:#1B638A;
+	opacity: .5;
+}
+.wpum-form fieldset.fieldset-terms .description, .wpum-form fieldset.fieldset-privacy .description{
+	font-size:14px;
+}
