@@ -446,7 +446,7 @@ function konto_nav_menu_items( $items, $menu ){
 function wpum_username_check($pass, $fields, $values, $form ) {
 	$username = $values['register'][ 'username' ];
 
-	if(preg_match('/[^a-z_\-0-9]/i', $username)) {
+	if(preg_match('/[^a-z_\-0-9]/', $username)) {
 			return new WP_Error( 'nickname-validation-error', __( 'This username cannot be used.', 'wp-user-manager' ) );
 	}
 	return $pass;
