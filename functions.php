@@ -449,6 +449,12 @@ function wpum_username_check($pass, $fields, $values, $form ) {
 	if(preg_match('/[^a-z_\-0-9]/', $username)) {
 			return new WP_Error( 'nickname-validation-error', __( 'This username cannot be used.', 'wp-user-manager' ) );
 	}
+	if ( strlen($username) < 5  ) {
+		return new WP_Error( 'nickname-validation-error', __( 'Der Nutzername muss zwischen 5 und 25 Zeichen lang sein.', 'wp-user-manager' ) );
+	}
+	if ( strlen( $username) > 25 ) {
+		return new WP_Error( 'nickname-validation-error', __( 'Der Nutzername muss zwischen 5 und 25 Zeichen lang sein.', 'wp-user-manager' ) );
+	}
 	return $pass;
 
 }
