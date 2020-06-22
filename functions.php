@@ -444,7 +444,7 @@ function konto_nav_menu_items( $items, $menu ){
 
 
 function wpum_username_check($pass, $fields, $values, $form ) {
-	if( $form == 'login' || $form == 'profile' ) {
+	 if($form == 'login' || $form == 'profile' || $form == 'password-recovery' ){
         	return $pass;
         }
 	$username = $values['register'][ 'username' ];
