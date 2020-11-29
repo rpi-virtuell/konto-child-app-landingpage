@@ -340,13 +340,25 @@ function konto_rw_start_session() {
 
 
 	}
+	
 	//die($_SESSION['redirect_to']);
 }
+
+add_action('login_init','login_form_add_design_tweaks');
+
+function login_form_add_design_tweaks(){
+	wp_enqueue_style('loginstyles', get_stylesheet_directory_uri().'/css/login.css' );
+}
+
+
 add_action('user_register', 'konto_rw_update_user_referrer', 10, 1);
 
 function konto_rw_update_user_referrer($user_id){
-    $url = wp_parse_url( $_SESSION['service']);
+    
+	$url = wp_parse_url( $_SESSION['service']);
 	update_user_meta($user_id, 'konto_register_referrer_host', $url['host']);
+	
+	
 }
 add_action('wp_login', 'konto_rw_update_user_redircet', 10, 2);
 
@@ -444,9 +456,12 @@ function konto_nav_menu_items( $items, $menu ){
 
 
 function wpum_username_check($pass, $fields, $values, $form ) {
-	 if($form == 'login' || $form == 'profile' || $form == 'password-recovery'  || $form == 'password' ){
-        return $pass;
-    }
+	
+	//var_dump($form);
+	
+	if($form == 'login' || $form == 'profile' || $form == 'password-recovery'  || $form == 'password' ){
+		return $pass;
+	}
 	$username = $values['register'][ 'username' ];
 
 	if(preg_match('/[^a-z_\-0-9]/', $username)) {
