@@ -330,12 +330,16 @@ function konto_rw_start_session() {
 	// Check for referrer and store in session.
 	// If there is no referrer, assign to user zero.
 	if (!isset($_SESSION['ref_service']) && isset($_GET['ref_service'])) {
-		$_SESSION['service'] = $_GET['ref_service'];
+		
+		
+//var_dump(parse_url($_GET['ref_service']));
+		
+		$_SESSION['service'] = urldecode($_GET['ref_service']);
 	}
 	if (!isset($_SESSION['redirect_to']) && isset($_GET['redirect_to'])) {
 
 
-		$_SESSION['redirect_to'] = $_GET['redirect_to'];
+		$_SESSION['redirect_to'] = urldecode($_GET['redirect_to']);
 
 
 
@@ -416,7 +420,7 @@ function _konto_nav_menu_item( $title, $url, $order, $parent = 0 ){
 	$item->type = '';
 	$item->object = '';
 	$item->object_id = '';
-	$item->classes = array();
+	$item->classes = array('current_service','current_page_ancestor');
 	$item->target = '';
 	$item->attr_title = '';
 	$item->description = '';
@@ -432,6 +436,7 @@ function konto_nav_menu_items( $items, $menu ){
 	if ( $menu->slug == 'main'  && isset($_SESSION['service'])){
 		$url_parse = wp_parse_url($_SESSION['service']);
 
+
 		$hostparts = explode('.', $url_parse['host'] );
 		array_pop($hostparts);
 		$m = count($hostparts)-1;
@@ -439,6 +444,7 @@ function konto_nav_menu_items( $items, $menu ){
 		array_pop($hostparts);
 		$name = ucfirst(implode('.' ,$hostparts));
         $host = $domain .' '.$name;
+
 
         $_SESSION['service_link']='<p>Zurück zu <a href="'.$host.'">'.$host.'</a>';
 

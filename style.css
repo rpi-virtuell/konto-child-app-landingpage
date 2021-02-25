@@ -12,7 +12,6 @@ Updated: 2020-01-26 10:06:24
 */
 
 /* Register Page */
-
 body#login-page {
     background: #fff;
 }
@@ -100,4 +99,8 @@ p.or {
 }
 .wpum-form fieldset.fieldset-terms .description, .wpum-form fieldset.fieldset-privacy .description{
 	font-size:14px;
+}
+
+.current_service.current_page_ancestor > a{
+	border-color: red!important;
 }
