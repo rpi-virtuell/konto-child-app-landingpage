@@ -359,3 +359,14 @@ add_shortcode('password_forgotten_form',function ($atts){
 	include 'sections/password-forgotten.php';
 	return ob_get_clean();
 });
+
+//Minimum Character Limit for Gravity Forms
+require_once "classes/GW_Minimum_Characters.php";
+new GW_Minimum_Characters( array(
+	'form_id' => 4,
+	'field_id' => 1,
+	'min_chars' => 4,
+	'max_chars' => 30,
+	'min_validation_message' => __( 'Benutzername zu kurz! Der Benutzername muss mindestens %s Zeichen enthalten.' ),
+	'max_validation_message' => __( 'Benutzername zu lang! Sie können nur %s-Zeichen eingeben.' )
+) );
