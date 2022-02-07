@@ -309,6 +309,7 @@ function wpum_username_check($pass, $fields, $values, $form ) {
 }
 //add_filter( 'submit_wpum_form_validate_fields', 'wpum_username_check', 10, 4 );
 
+
 add_action("gform_user_registration_validation", "ignore_already_registered_error", 10, 3);
 function ignore_already_registered_error($form, $config, $pagenum){
 
@@ -329,22 +330,39 @@ function ignore_already_registered_error($form, $config, $pagenum){
 	foreach($form['fields'] as &$field) {
 
 
+
+
 		if($field->id == $user_id ){
+
+
+
 			$entry = GFFormsModel::get_current_lead();
 			$meta = rgar( $config, 'meta' );
 			$username       = gf_user_registration()->get_meta_value( 'username', $meta, $form, $entry );
 
+			if( $field->validation_message)
+				$field->validation_message .= " ";
+			else
+				$field->validation_message = "";
+
+			if(strlen($username)<6){
+				$field->validation_message .= "Benutzernamen sollten mindestens 6 Zeichen lang sein. ";
+				$field->failed_validation = true;
+			}
+
+			$suchmuster = '/[ A-ZßöäüÄÖÜ@\.\_\-]/';
+			if(preg_match($suchmuster, $username,  $matches)){
+				$field->validation_message .= "Benutzernamen dürfen nur Kleinbuchstaben und Zahlen enthalten. ";
+				$field->failed_validation = true;
+			}
+
+
 			$wp_user = get_user_by('login', $username);
 
 			if($wp_user){
-				$field->validation_message = "Dieser Username existiert bereits. Wähle bitte einen anderen.";
+				$field->validation_message .= "Dieser Username existiert bereits. Wähle bitte einen anderen.";
 				$field->failed_validation = true;
-            }
-
-		    //$field->validation_message == 'This username is already registered')
-
-           // var_dump($field->validation_message);
-
+			}
 
 		}
 
@@ -353,6 +371,7 @@ function ignore_already_registered_error($form, $config, $pagenum){
 	return $form;
 
 }
+
 
 add_shortcode('password_forgotten_form',function ($atts){
 	ob_start();
