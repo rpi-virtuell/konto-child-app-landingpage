@@ -109,12 +109,11 @@ function rw_redirect_login_page() {
 	$login_page  = home_url('/anmelden/');
 	$register_page = home_url('/registrieren/');
 	$page_viewed = basename($_SERVER['REQUEST_URI']);
-	if($_REQUEST['action'] == 'register'){
+	if(isset($_GET['action']) && $_GET['action'] == 'register'){
 		$querystring = '';
 		if(isset($_GET['ref_service'])){
 			$querystring = '?ref_service='. $_GET['ref_service'];
 		}
-
 		wp_redirect($register_page.$querystring);
 		exit;
 	}
@@ -181,7 +180,7 @@ function konto_rw_update_user_referrer($user_id){
 
 
 }
-add_action('wp_login', 'konto_rw_update_user_redircet', 10, 2);
+//add_action('wp_login', 'konto_rw_update_user_redircet', 10, 2);
 
 function konto_rw_update_user_redircet( $user_login, $user){
 
@@ -227,7 +226,7 @@ function konto_rw_update_user_redircet( $user_login, $user){
  */
 function _konto_nav_menu_item( $title, $url, $order, $parent = 0 ){
 	$item = new stdClass();
-	$item->ID = 1000000 + $order + parent;
+	$item->ID = 9000000 + $order + $parent;
 	$item->db_id = $item->ID;
 	$item->title = $title;
 	$item->url = $url;
@@ -248,6 +247,11 @@ add_filter( 'wp_get_nav_menu_items', 'konto_nav_menu_items', 20, 2 );
 
 function konto_nav_menu_items( $items, $menu ){
 
+
+
+
+
+
         // only add item to a specific menu
 	if ( $menu->slug == 'main'  && isset($_SESSION['service'])){
 		$url_parse = wp_parse_url($_SESSION['service']);
@@ -267,10 +271,12 @@ function konto_nav_menu_items( $items, $menu ){
 		$_SESSION['service_link']='<p>Zurück zu <a href="'.$_SESSION['service'].'">'.$host.'</a>';
 
 
-
 		// only if frontpage
         if(! is_admin() ){
+
+
 	        $items[] = _konto_nav_menu_item( $host , ''.$_SESSION['service'], 1 );
+
         }
 
 
